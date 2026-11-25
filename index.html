@@ -34,6 +34,29 @@
       letter-spacing: .01em;
       -webkit-font-smoothing: antialiased;
     }
+    body.is-loading { overflow: hidden; }
+    .preloader {
+      position: fixed;
+      z-index: 1000;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background: var(--white);
+      color: var(--black);
+      transition: transform .24s cubic-bezier(.76, 0, .24, 1);
+    }
+    .preloader.is-hidden { transform: translateY(-100%); pointer-events: none; }
+    .preloader-inner { display: grid; width: min(180px, 42vw); gap: 20px; }
+    .preloader-logo { font-size: 30px; font-weight: 800; letter-spacing: -.09em; line-height: 1; }
+    .preloader-track { display: block; height: 1px; background: var(--line); }
+    .preloader-progress {
+      display: block;
+      width: 0;
+      height: 100%;
+      background: var(--black);
+      animation: preloader-fill .8s cubic-bezier(.2, .7, .2, 1) forwards;
+    }
+    @keyframes preloader-fill { to { width: 100%; } }
     a { color: inherit; text-decoration: none; }
     button { color: inherit; font: inherit; }
     .wrap { width: min(1280px, calc(100% - 72px)); margin: 0 auto; }
@@ -312,8 +335,15 @@
       .fade-up { opacity: 1; transform: none; }
     }
   </style>
+  <noscript><style>body.is-loading { overflow: auto; } #preloader { display: none; }</style></noscript>
 </head>
-<body>
+<body class="is-loading">
+  <div class="preloader" id="preloader" role="status" aria-label="MUTE. 페이지를 불러오는 중">
+    <div class="preloader-inner">
+      <span class="preloader-logo">MUTE.</span>
+      <span class="preloader-track" aria-hidden="true"><span class="preloader-progress"></span></span>
+    </div>
+  </div>
   <header class="topbar">
     <nav class="nav wrap" aria-label="Primary navigation">
       <a class="wordmark" href="#home" aria-label="MUTE. home">MUTE.</a>
@@ -603,6 +633,21 @@
   </footer>
 
   <script>
+    const preloader = document.querySelector("#preloader");
+    if (preloader) {
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const removePreloader = () => {
+        document.body.classList.remove("is-loading");
+        preloader.remove();
+      };
+
+      preloader.addEventListener("transitionend", removePreloader, { once: true });
+      window.setTimeout(() => {
+        preloader.classList.add("is-hidden");
+        window.setTimeout(removePreloader, reduceMotion ? 50 : 350);
+      }, reduceMotion ? 120 : 800);
+    }
+
     const menuToggle = document.querySelector(".menu-toggle");
     const navLinks = document.querySelector("#nav-links");
     const menuFilters = document.querySelector(".menu-filters");
