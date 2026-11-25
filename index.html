@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#FAF8F5">
+  <meta name="description" content="천천히 머물고 싶은 한 잔, 서울의 스페셜티 카페 느린결.">
+  <title>느린결 | Specialty Coffee</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Serif+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #FAF8F5;
+      --ink: #1E1E1E;
+      --espresso: #4A3525;
+      --muted: #827a72;
+      --line: #e8e2da;
+      --serif: "Noto Serif KR", Georgia, serif;
+      --sans: "DM Sans", "Noto Sans KR", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .wrap { width: min(1180px, calc(100% - 48px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      z-index: 5;
+      top: 0;
+      background: rgba(250, 248, 245, .94);
+      border-bottom: 1px solid rgba(74, 53, 37, .1);
+      backdrop-filter: blur(12px);
+    }
+    .nav {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand {
+      color: var(--espresso);
+      font-family: var(--serif);
+      font-size: 23px;
+      font-weight: 600;
+      letter-spacing: -.08em;
+    }
+    .brand span {
+      display: block;
+      margin-top: 1px;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 8px;
+      letter-spacing: .24em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+    .nav-links { display: flex; align-items: center; gap: 34px; font-size: 13px; }
+    .nav-links a { transition: color .2s ease; }
+    .nav-links a:hover { color: #9a6b45; }
+    .nav-visit {
+      padding: 11px 17px;
+      border: 1px solid var(--espresso);
+      border-radius: 2px;
+      color: var(--espresso);
+    }
+    .menu-toggle {
+      display: none;
+      border: 0;
+      background: none;
+      color: var(--espresso);
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .hero {
+      min-height: 610px;
+      display: grid;
+      grid-template-columns: 1fr 1.08fr;
+      align-items: center;
+      gap: 54px;
+      padding-top: 36px;
+      padding-bottom: 36px;
+    }
+    .eyebrow {
+      margin: 0 0 21px;
+      color: #92775e;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    .hero h1 {
+      margin-bottom: 22px;
+      color: var(--espresso);
+      font-family: var(--serif);
+      font-size: clamp(42px, 5vw, 66px);
+      font-weight: 500;
+      letter-spacing: -.09em;
+      line-height: 1.38;
+      word-break: keep-all;
+    }
+    .hero-copy {
+      max-width: 390px;
+      margin-bottom: 31px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.95;
+      word-break: keep-all;
+    }
+    .button {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 22px;
+      background: var(--espresso);
+      color: #fff;
+      font-size: 12px;
+      transition: background .2s ease, transform .2s ease;
+    }
+    .button:hover { transform: translateY(-2px); background: #624831; }
+    .hero-image {
+      position: relative;
+      height: 500px;
+      overflow: hidden;
+      background: #ddd4c8;
+    }
+    .hero-image img { width: 100%; height: 100%; object-fit: cover; }
+    .image-caption {
+      position: absolute;
+      right: 18px;
+      bottom: 18px;
+      padding: 10px 13px;
+      background: rgba(250, 248, 245, .9);
+      color: var(--espresso);
+      font-size: 10px;
+      letter-spacing: .04em;
+    }
+
+    .section { padding: 105px 0; }
+    .section-heading { margin-bottom: 42px; text-align: center; }
+    .section-heading .eyebrow { margin-bottom: 12px; }
+    .section-heading h2 {
+      margin-bottom: 12px;
+      color: var(--espresso);
+      font-family: var(--serif);
+      font-size: clamp(29px, 3.2vw, 40px);
+      font-weight: 500;
+      letter-spacing: -.07em;
+    }
+    .section-heading p:last-child { margin-bottom: 0; color: var(--muted); font-size: 13px; }
+    .menu-section { background: #f3f0eb; }
+    .menu-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px 18px; }
+    .menu-card { min-width: 0; }
+    .menu-card img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1.06;
+      object-fit: cover;
+      background: #ded8ce;
+    }
+    .menu-info { padding: 16px 2px 0; }
+    .menu-name {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 7px;
+    }
+    .menu-name h3 { margin: 0; font-size: 15px; font-weight: 600; }
+    .price { flex: 0 0 auto; color: var(--espresso); font-size: 13px; font-weight: 600; }
+    .menu-info p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.7; word-break: keep-all; }
+    .category-label {
+      display: inline-block;
+      margin-bottom: 8px;
+      color: #9a7958;
+      font-size: 9px;
+      letter-spacing: .14em;
+    }
+
+    .story {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 90px;
+    }
+    .story-image { height: 440px; overflow: hidden; background: #ddd4c8; }
+    .story-image img { width: 100%; height: 100%; object-fit: cover; }
+    .story-copy h2 {
+      margin-bottom: 24px;
+      color: var(--espresso);
+      font-family: var(--serif);
+      font-size: clamp(31px, 3vw, 42px);
+      font-weight: 500;
+      letter-spacing: -.08em;
+      line-height: 1.55;
+      word-break: keep-all;
+    }
+    .story-copy p:not(.eyebrow) {
+      margin-bottom: 15px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 2;
+      word-break: keep-all;
+    }
+    .story-signature { margin-top: 27px; color: var(--espresso); font-family: var(--serif); font-size: 14px; }
+
+    .visit-section { padding-top: 25px; }
+    .visit-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 330px;
+      background: #eee9e2;
+    }
+    .visit-photo { min-height: 330px; overflow: hidden; }
+    .visit-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .visit-info { align-self: center; padding: 50px 12%; }
+    .visit-info h2 {
+      margin-bottom: 25px;
+      color: var(--espresso);
+      font-family: var(--serif);
+      font-size: 31px;
+      font-weight: 500;
+      letter-spacing: -.07em;
+    }
+    .visit-info dl { margin: 0; }
+    .visit-info dl div { display: grid; grid-template-columns: 72px 1fr; gap: 12px; padding: 11px 0; border-top: 1px solid #dcd4ca; font-size: 12px; }
+    .visit-info dt { color: var(--espresso); font-weight: 600; }
+    .visit-info dd { margin: 0; color: #746b63; line-height: 1.7; }
+
+    footer { padding: 31px 0; background: var(--ink); color: #ded8d1; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .footer-brand { color: #fff; font-family: var(--serif); font-size: 19px; }
+    .footer-note { margin: 5px 0 0; color: #a9a19a; font-size: 10px; }
+    .footer-copy { margin: 0; color: #a9a19a; font-size: 10px; }
+
+    @media (max-width: 800px) {
+      .hero { min-height: auto; grid-template-columns: 1fr 1fr; gap: 28px; padding-top: 52px; padding-bottom: 52px; }
+      .hero-image { height: 410px; }
+      .menu-grid { grid-template-columns: repeat(2, 1fr); gap: 28px 16px; }
+      .story { gap: 40px; }
+      .story-image { height: 380px; }
+      .visit-info { padding: 38px 9%; }
+    }
+    @media (max-width: 600px) {
+      .wrap { width: min(100% - 36px, 430px); }
+      .nav { height: 66px; }
+      .menu-toggle { display: block; }
+      .nav-links {
+        position: absolute;
+        top: 65px;
+        right: 0;
+        left: 0;
+        display: none;
+        align-items: stretch;
+        gap: 0;
+        padding: 8px 18px 17px;
+        background: var(--paper);
+        border-bottom: 1px solid var(--line);
+      }
+      .nav-links.is-open { display: flex; flex-direction: column; }
+      .nav-links a { padding: 12px 0; }
+      .nav-visit { border: 0; }
+      .hero { grid-template-columns: 1fr; gap: 28px; padding-top: 51px; }
+      .hero h1 { font-size: 43px; }
+      .hero-copy { font-size: 13px; }
+      .hero-image { height: 340px; }
+      .section { padding: 76px 0; }
+      .section-heading { margin-bottom: 31px; }
+      .menu-grid { gap: 23px 12px; }
+      .menu-name h3 { font-size: 13px; }
+      .menu-info { padding-top: 12px; }
+      .story { grid-template-columns: 1fr; gap: 30px; }
+      .story-image { height: 320px; }
+      .visit-section { padding-top: 0; }
+      .visit-card { grid-template-columns: 1fr; }
+      .visit-photo { min-height: 250px; height: 250px; }
+      .visit-info { padding: 33px 25px 37px; }
+      .footer-inner { align-items: flex-start; flex-direction: column; gap: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav wrap" aria-label="주요 메뉴">
+      <a class="brand" href="#home" aria-label="느린결 홈">느린결<span>slowly, with care</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">메뉴</button>
+      <div class="nav-links" id="nav-links">
+        <a href="#menu">메뉴</a>
+        <a href="#story">우리의 이야기</a>
+        <a href="#visit" class="nav-visit">매장 안내</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero wrap" id="home">
+      <div>
+        <p class="eyebrow">A little pause in your day</p>
+        <h1>느린 하루의<br>좋은 한 잔.</h1>
+        <p class="hero-copy">바쁜 하루의 속도를 잠시 늦추고, 좋은 원두와 다정한 마음으로 내린 커피를 만나는 곳. 오늘의 작은 쉼표가 되어드릴게요.</p>
+        <a class="button" href="#menu">메뉴 둘러보기 <span aria-hidden="true">&nbsp;↗</span></a>
+      </div>
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&amp;fit=crop&amp;w=1200&amp;q=85" alt="햇살이 드는 카페에서 정성스럽게 내리는 커피">
+        <span class="image-caption">Roasted with care, served with warmth.</span>
+      </div>
+    </section>
+
+    <section class="section menu-section" id="menu">
+      <div class="wrap">
+        <div class="section-heading">
+          <p class="eyebrow">From our bar</p>
+          <h2>오늘의 메뉴</h2>
+          <p>좋은 재료와 제철의 맛을 담아 준비합니다.</p>
+        </div>
+        <div class="menu-grid">
+          <article class="menu-card">
+            <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="따뜻한 카페 라테">
+            <div class="menu-info"><span class="category-label">COFFEE</span><div class="menu-name"><h3>느린결 라테</h3><span class="price">₩5,500</span></div><p>고소한 하우스 블렌드와 부드러운 우유.</p></div>
+          </article>
+          <article class="menu-card">
+            <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="에스프레소 한 잔">
+            <div class="menu-info"><span class="category-label">COFFEE</span><div class="menu-name"><h3>에스프레소</h3><span class="price">₩4,000</span></div><p>다크 초콜릿과 구운 견과의 깊은 여운.</p></div>
+          </article>
+          <article class="menu-card">
+            <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="얼음과 함께 즐기는 아이스 커피">
+            <div class="menu-info"><span class="category-label">COFFEE</span><div class="menu-name"><h3>시그니처 크림 커피</h3><span class="price">₩6,000</span></div><p>진한 콜드브루 위에 달콤한 크림 한 겹.</p></div>
+          </article>
+          <article class="menu-card">
+            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="드립 커피를 준비하는 바리스타">
+            <div class="menu-info"><span class="category-label">COFFEE</span><div class="menu-name"><h3>오늘의 핸드드립</h3><span class="price">₩5,500</span></div><p>산지의 개성이 또렷한 오늘의 싱글 오리진.</p></div>
+          </article>
+          <article class="menu-card">
+            <img src="https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="고운 말차 라테">
+            <div class="menu-info"><span class="category-label">NON-COFFEE</span><div class="menu-name"><h3>말차 라테</h3><span class="price">₩6,000</span></div><p>은은한 단맛과 깊은 풍미의 제주 말차.</p></div>
+          </article>
+          <article class="menu-card">
+            <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="향긋한 차 한 잔">
+            <div class="menu-info"><span class="category-label">NON-COFFEE</span><div class="menu-name"><h3>계절 과일 에이드</h3><span class="price">₩6,500</span></div><p>제철 과일을 천천히 담아 만든 산뜻한 에이드.</p></div>
+          </article>
+          <article class="menu-card">
+            <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="따뜻하게 우린 허브티">
+            <div class="menu-info"><span class="category-label">NON-COFFEE</span><div class="menu-name"><h3>캐모마일 티</h3><span class="price">₩5,000</span></div><p>마음을 포근하게 감싸는 꽃향기 가득한 차.</p></div>
+          </article>
+          <article class="menu-card">
+            <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="시원한 과일 음료">
+            <div class="menu-info"><span class="category-label">NON-COFFEE</span><div class="menu-name"><h3>수제 레몬티</h3><span class="price">₩5,500</span></div><p>직접 담근 레몬청으로 완성한 새콤달콤한 티.</p></div>
+          </article>
+          <article class="menu-card">
+            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="초콜릿 케이크 한 조각">
+            <div class="menu-info"><span class="category-label">DESSERT</span><div class="menu-name"><h3>진한 초콜릿 케이크</h3><span class="price">₩7,000</span></div><p>부드러운 가나슈와 촉촉한 시트의 조화.</p></div>
+          </article>
+          <article class="menu-card">
+            <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="크림과 과일을 곁들인 디저트">
+            <div class="menu-info"><span class="category-label">DESSERT</span><div class="menu-name"><h3>제철 과일 타르트</h3><span class="price">₩7,500</span></div><p>바삭한 타르트 위에 계절의 과일을 가득.</p></div>
+          </article>
+          <article class="menu-card">
+            <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="갓 구운 도넛">
+            <div class="menu-info"><span class="category-label">DESSERT</span><div class="menu-name"><h3>버터 스콘</h3><span class="price">₩4,500</span></div><p>겉은 바삭하고 속은 포슬한 매일 아침 구움과자.</p></div>
+          </article>
+          <article class="menu-card">
+            <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="고소한 쿠키와 디저트">
+            <div class="menu-info"><span class="category-label">DESSERT</span><div class="menu-name"><h3>솔티 초코 쿠키</h3><span class="price">₩3,800</span></div><p>달콤한 초콜릿에 소금 한 꼬집을 더했어요.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="story">
+      <div class="story wrap">
+        <div class="story-image">
+          <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&amp;fit=crop&amp;w=1000&amp;q=85" alt="나무와 따뜻한 빛으로 채운 카페 공간">
+        </div>
+        <div class="story-copy">
+          <p class="eyebrow">Our little story</p>
+          <h2>커피 한 잔에<br>마음을 담습니다.</h2>
+          <p>느린결은 좋은 커피가 좋은 하루의 시작이 될 수 있다고 믿습니다. 산지와 농부의 이야기를 담은 원두를 고르고, 한 잔마다 가장 알맞은 방식으로 정성껏 준비합니다.</p>
+          <p>서두르지 않아도 괜찮은 곳. 혼자만의 시간도, 다정한 대화도 편안히 머물 수 있도록 따뜻한 공간을 가꾸어갑니다.</p>
+          <p class="story-signature">천천히, 정성스럽게 — 느린결</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section visit-section" id="visit">
+      <div class="visit-card wrap">
+        <div class="visit-photo">
+          <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&amp;fit=crop&amp;w=1000&amp;q=85" alt="따뜻하고 편안한 카페 내부">
+        </div>
+        <div class="visit-info">
+          <p class="eyebrow">Come on in</p>
+          <h2>매장 안내</h2>
+          <dl>
+            <div><dt>주소</dt><dd>서울특별시 성동구 서울숲길 24, 1층</dd></div>
+            <div><dt>영업시간</dt><dd>매일 10:00 – 20:00<br>매주 월요일 휴무</dd></div>
+            <div><dt>찾아오시는 길</dt><dd>서울숲역 5번 출구에서 도보 7분</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner wrap">
+      <div><div class="footer-brand">느린결</div><p class="footer-note">좋은 커피와 다정한 쉼이 있는 곳.</p></div>
+      <p class="footer-copy">© 2025 NEURINGYEOL COFFEE. ALL RIGHTS RESERVED.</p>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector("#nav-links");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("is-open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    navLinks.addEventListener("click", (event) => {
+      if (event.target.closest("a")) {
+        navLinks.classList.remove("is-open");
+        menuToggle.setAttribute("aria-expanded", "false");
+      }
+    });
+  </script>
+</body>
+</html>
