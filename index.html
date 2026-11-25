@@ -6,6 +6,20 @@
   <meta name="theme-color" content="#FFFFFF">
   <meta name="description" content="MUTE. — Coffee and quiet form, Seongsu Seoul.">
   <title>MUTE.</title>
+  <script>
+    const navigationEntry = performance.getEntriesByType("navigation")[0];
+    const isReload = navigationEntry && navigationEntry.type === "reload";
+    if (isReload) {
+      if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+      if (location.hash) history.replaceState(history.state, "", location.pathname + location.search);
+      window.addEventListener("pageshow", () => {
+        const root = document.documentElement;
+        root.style.scrollBehavior = "auto";
+        window.scrollTo(0, 0);
+        window.requestAnimationFrame(() => root.style.removeProperty("scroll-behavior"));
+      }, { once: true });
+    }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
