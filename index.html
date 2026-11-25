@@ -162,8 +162,20 @@
     }
     .section-heading p:last-child { margin-bottom: 0; color: var(--muted); font-size: 13px; }
     .menu-section { background: #f3f0eb; }
+    .menu-filters { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin: -15px 0 34px; }
+    .filter-button {
+      padding: 9px 16px;
+      border: 1px solid #d6cec4;
+      background: transparent;
+      color: var(--espresso);
+      font-size: 11px;
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease, border-color .2s ease;
+    }
+    .filter-button[aria-pressed="true"] { border-color: var(--espresso); background: var(--espresso); color: #fff; }
     .menu-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px 18px; }
     .menu-card { min-width: 0; }
+    .menu-card[hidden] { display: none; }
     .menu-card img {
       display: block;
       width: 100%;
@@ -189,6 +201,17 @@
       font-size: 9px;
       letter-spacing: .14em;
     }
+    .menu-actions { display: flex; align-items: center; justify-content: flex-end; margin-top: 12px; }
+    .add-button {
+      padding: 7px 12px;
+      border: 1px solid var(--espresso);
+      background: transparent;
+      color: var(--espresso);
+      font-size: 10px;
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease;
+    }
+    .add-button:hover { background: var(--espresso); color: #fff; }
 
     .story {
       display: grid;
@@ -244,7 +267,34 @@
     .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
     .footer-brand { color: #fff; font-family: var(--serif); font-size: 19px; }
     .footer-note { margin: 5px 0 0; color: #a9a19a; font-size: 10px; }
+    .footer-note a { color: inherit; }
+    .footer-note a:hover { color: #fff; }
     .footer-copy { margin: 0; color: #a9a19a; font-size: 10px; }
+    .cart-summary {
+      position: fixed;
+      z-index: 8;
+      right: 24px;
+      bottom: 20px;
+      width: min(320px, calc(100vw - 32px));
+      padding: 16px 18px;
+      background: var(--ink);
+      color: #fff;
+      box-shadow: 0 8px 28px rgba(30, 30, 30, .2);
+    }
+    .cart-summary-top, .cart-total-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .cart-summary-top { margin-bottom: 12px; }
+    .cart-summary-label { margin: 0; color: #c9b9a8; font-size: 9px; letter-spacing: .15em; }
+    .cart-count { margin: 4px 0 0; font-size: 12px; }
+    .clear-cart {
+      padding: 5px 8px;
+      border: 1px solid #625b55;
+      background: transparent;
+      color: #ded8d1;
+      font-size: 10px;
+      cursor: pointer;
+    }
+    .cart-total-row { padding-top: 11px; border-top: 1px solid #48433f; color: #c9c1ba; font-size: 11px; }
+    .cart-total { color: #fff; font-size: 16px; }
 
     @media (max-width: 800px) {
       .hero { min-height: auto; grid-template-columns: 1fr 1fr; gap: 28px; padding-top: 52px; padding-bottom: 52px; }
@@ -289,6 +339,7 @@
       .visit-photo { min-height: 250px; height: 250px; }
       .visit-info { padding: 33px 25px 37px; }
       .footer-inner { align-items: flex-start; flex-direction: column; gap: 13px; }
+      .cart-summary { right: 16px; bottom: 12px; }
     }
   </style>
 </head>
@@ -326,54 +377,60 @@
           <h2>오늘의 메뉴</h2>
           <p>좋은 재료와 제철의 맛을 담아 준비합니다.</p>
         </div>
+        <div class="menu-filters" role="group" aria-label="메뉴 카테고리">
+          <button class="filter-button" type="button" data-filter="all" aria-pressed="true">전체</button>
+          <button class="filter-button" type="button" data-filter="coffee" aria-pressed="false">커피</button>
+          <button class="filter-button" type="button" data-filter="noncoffee" aria-pressed="false">논커피</button>
+          <button class="filter-button" type="button" data-filter="dessert" aria-pressed="false">디저트</button>
+        </div>
         <div class="menu-grid">
-          <article class="menu-card">
+          <article class="menu-card" data-category="coffee">
             <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="따뜻한 카페 라테">
-            <div class="menu-info"><span class="category-label">COFFEE</span><div class="menu-name"><h3>느린결 라테</h3><span class="price">₩5,500</span></div><p>고소한 하우스 블렌드와 부드러운 우유.</p></div>
+            <div class="menu-info"><span class="category-label">COFFEE</span><div class="menu-name"><h3>느린결 라테</h3><span class="price">₩5,500</span></div><p>고소한 하우스 블렌드와 부드러운 우유.</p><div class="menu-actions"><button class="add-button" type="button" data-name="느린결 라테" data-price="5500">담기</button></div></div>
           </article>
-          <article class="menu-card">
+          <article class="menu-card" data-category="coffee">
             <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="에스프레소 한 잔">
-            <div class="menu-info"><span class="category-label">COFFEE</span><div class="menu-name"><h3>에스프레소</h3><span class="price">₩4,000</span></div><p>다크 초콜릿과 구운 견과의 깊은 여운.</p></div>
+            <div class="menu-info"><span class="category-label">COFFEE</span><div class="menu-name"><h3>에스프레소</h3><span class="price">₩4,000</span></div><p>다크 초콜릿과 구운 견과의 깊은 여운.</p><div class="menu-actions"><button class="add-button" type="button" data-name="에스프레소" data-price="4000">담기</button></div></div>
           </article>
-          <article class="menu-card">
+          <article class="menu-card" data-category="coffee">
             <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="얼음과 함께 즐기는 아이스 커피">
-            <div class="menu-info"><span class="category-label">COFFEE</span><div class="menu-name"><h3>시그니처 크림 커피</h3><span class="price">₩6,000</span></div><p>진한 콜드브루 위에 달콤한 크림 한 겹.</p></div>
+            <div class="menu-info"><span class="category-label">COFFEE</span><div class="menu-name"><h3>시그니처 크림 커피</h3><span class="price">₩6,000</span></div><p>진한 콜드브루 위에 달콤한 크림 한 겹.</p><div class="menu-actions"><button class="add-button" type="button" data-name="시그니처 크림 커피" data-price="6000">담기</button></div></div>
           </article>
-          <article class="menu-card">
+          <article class="menu-card" data-category="coffee">
             <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="드립 커피를 준비하는 바리스타">
-            <div class="menu-info"><span class="category-label">COFFEE</span><div class="menu-name"><h3>오늘의 핸드드립</h3><span class="price">₩5,500</span></div><p>산지의 개성이 또렷한 오늘의 싱글 오리진.</p></div>
+            <div class="menu-info"><span class="category-label">COFFEE</span><div class="menu-name"><h3>오늘의 핸드드립</h3><span class="price">₩5,500</span></div><p>산지의 개성이 또렷한 오늘의 싱글 오리진.</p><div class="menu-actions"><button class="add-button" type="button" data-name="오늘의 핸드드립" data-price="5500">담기</button></div></div>
           </article>
-          <article class="menu-card">
+          <article class="menu-card" data-category="noncoffee">
             <img src="https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="고운 말차 라테">
-            <div class="menu-info"><span class="category-label">NON-COFFEE</span><div class="menu-name"><h3>말차 라테</h3><span class="price">₩6,000</span></div><p>은은한 단맛과 깊은 풍미의 제주 말차.</p></div>
+            <div class="menu-info"><span class="category-label">NON-COFFEE</span><div class="menu-name"><h3>말차 라테</h3><span class="price">₩6,000</span></div><p>은은한 단맛과 깊은 풍미의 제주 말차.</p><div class="menu-actions"><button class="add-button" type="button" data-name="말차 라테" data-price="6000">담기</button></div></div>
           </article>
-          <article class="menu-card">
+          <article class="menu-card" data-category="noncoffee">
             <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="향긋한 차 한 잔">
-            <div class="menu-info"><span class="category-label">NON-COFFEE</span><div class="menu-name"><h3>계절 과일 에이드</h3><span class="price">₩6,500</span></div><p>제철 과일을 천천히 담아 만든 산뜻한 에이드.</p></div>
+            <div class="menu-info"><span class="category-label">NON-COFFEE</span><div class="menu-name"><h3>계절 과일 에이드</h3><span class="price">₩6,500</span></div><p>제철 과일을 천천히 담아 만든 산뜻한 에이드.</p><div class="menu-actions"><button class="add-button" type="button" data-name="계절 과일 에이드" data-price="6500">담기</button></div></div>
           </article>
-          <article class="menu-card">
+          <article class="menu-card" data-category="noncoffee">
             <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="따뜻하게 우린 허브티">
-            <div class="menu-info"><span class="category-label">NON-COFFEE</span><div class="menu-name"><h3>캐모마일 티</h3><span class="price">₩5,000</span></div><p>마음을 포근하게 감싸는 꽃향기 가득한 차.</p></div>
+            <div class="menu-info"><span class="category-label">NON-COFFEE</span><div class="menu-name"><h3>캐모마일 티</h3><span class="price">₩5,000</span></div><p>마음을 포근하게 감싸는 꽃향기 가득한 차.</p><div class="menu-actions"><button class="add-button" type="button" data-name="캐모마일 티" data-price="5000">담기</button></div></div>
           </article>
-          <article class="menu-card">
+          <article class="menu-card" data-category="noncoffee">
             <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="시원한 과일 음료">
-            <div class="menu-info"><span class="category-label">NON-COFFEE</span><div class="menu-name"><h3>수제 레몬티</h3><span class="price">₩5,500</span></div><p>직접 담근 레몬청으로 완성한 새콤달콤한 티.</p></div>
+            <div class="menu-info"><span class="category-label">NON-COFFEE</span><div class="menu-name"><h3>수제 레몬티</h3><span class="price">₩5,500</span></div><p>직접 담근 레몬청으로 완성한 새콤달콤한 티.</p><div class="menu-actions"><button class="add-button" type="button" data-name="수제 레몬티" data-price="5500">담기</button></div></div>
           </article>
-          <article class="menu-card">
+          <article class="menu-card" data-category="dessert">
             <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="초콜릿 케이크 한 조각">
-            <div class="menu-info"><span class="category-label">DESSERT</span><div class="menu-name"><h3>진한 초콜릿 케이크</h3><span class="price">₩7,000</span></div><p>부드러운 가나슈와 촉촉한 시트의 조화.</p></div>
+            <div class="menu-info"><span class="category-label">DESSERT</span><div class="menu-name"><h3>진한 초콜릿 케이크</h3><span class="price">₩7,000</span></div><p>부드러운 가나슈와 촉촉한 시트의 조화.</p><div class="menu-actions"><button class="add-button" type="button" data-name="진한 초콜릿 케이크" data-price="7000">담기</button></div></div>
           </article>
-          <article class="menu-card">
+          <article class="menu-card" data-category="dessert">
             <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="크림과 과일을 곁들인 디저트">
-            <div class="menu-info"><span class="category-label">DESSERT</span><div class="menu-name"><h3>제철 과일 타르트</h3><span class="price">₩7,500</span></div><p>바삭한 타르트 위에 계절의 과일을 가득.</p></div>
+            <div class="menu-info"><span class="category-label">DESSERT</span><div class="menu-name"><h3>제철 과일 타르트</h3><span class="price">₩7,500</span></div><p>바삭한 타르트 위에 계절의 과일을 가득.</p><div class="menu-actions"><button class="add-button" type="button" data-name="제철 과일 타르트" data-price="7500">담기</button></div></div>
           </article>
-          <article class="menu-card">
+          <article class="menu-card" data-category="dessert">
             <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="갓 구운 도넛">
-            <div class="menu-info"><span class="category-label">DESSERT</span><div class="menu-name"><h3>버터 스콘</h3><span class="price">₩4,500</span></div><p>겉은 바삭하고 속은 포슬한 매일 아침 구움과자.</p></div>
+            <div class="menu-info"><span class="category-label">DESSERT</span><div class="menu-name"><h3>버터 스콘</h3><span class="price">₩4,500</span></div><p>겉은 바삭하고 속은 포슬한 매일 아침 구움과자.</p><div class="menu-actions"><button class="add-button" type="button" data-name="버터 스콘" data-price="4500">담기</button></div></div>
           </article>
-          <article class="menu-card">
+          <article class="menu-card" data-category="dessert">
             <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="고소한 쿠키와 디저트">
-            <div class="menu-info"><span class="category-label">DESSERT</span><div class="menu-name"><h3>솔티 초코 쿠키</h3><span class="price">₩3,800</span></div><p>달콤한 초콜릿에 소금 한 꼬집을 더했어요.</p></div>
+            <div class="menu-info"><span class="category-label">DESSERT</span><div class="menu-name"><h3>솔티 초코 쿠키</h3><span class="price">₩3,800</span></div><p>달콤한 초콜릿에 소금 한 꼬집을 더했어요.</p><div class="menu-actions"><button class="add-button" type="button" data-name="솔티 초코 쿠키" data-price="3800">담기</button></div></div>
           </article>
         </div>
       </div>
@@ -414,14 +471,29 @@
 
   <footer>
     <div class="footer-inner wrap">
-      <div><div class="footer-brand">느린결</div><p class="footer-note">좋은 커피와 다정한 쉼이 있는 곳.</p></div>
+      <div><div class="footer-brand">느린결</div><p class="footer-note">좋은 커피와 다정한 쉼이 있는 곳.</p><p class="footer-note">운영자: 김이현, <a href="mailto:krh0802@gmail.com">krh0802@gmail.com</a></p></div>
       <p class="footer-copy">© 2025 NEURINGYEOL COFFEE. ALL RIGHTS RESERVED.</p>
     </div>
   </footer>
 
+  <aside class="cart-summary" aria-label="간편 주문 내역">
+    <div class="cart-summary-top">
+      <div><p class="cart-summary-label">QUICK ORDER</p><p class="cart-count" aria-live="polite">담은 메뉴 <strong id="cart-count">0</strong>개</p></div>
+      <button class="clear-cart" type="button">비우기</button>
+    </div>
+    <div class="cart-total-row"><span>총 예상 결제 금액</span><strong class="cart-total" id="cart-total" aria-live="polite">₩0</strong></div>
+  </aside>
+
   <script>
     const menuToggle = document.querySelector(".menu-toggle");
     const navLinks = document.querySelector("#nav-links");
+    const menuFilters = document.querySelector(".menu-filters");
+    const menuCards = document.querySelectorAll(".menu-card");
+    const menuGrid = document.querySelector(".menu-grid");
+    const cartCount = document.querySelector("#cart-count");
+    const cartTotal = document.querySelector("#cart-total");
+    const clearCart = document.querySelector(".clear-cart");
+    const cartItems = new Map();
 
     menuToggle.addEventListener("click", () => {
       const isOpen = navLinks.classList.toggle("is-open");
@@ -433,6 +505,48 @@
         navLinks.classList.remove("is-open");
         menuToggle.setAttribute("aria-expanded", "false");
       }
+    });
+
+    menuFilters.addEventListener("click", (event) => {
+      const selectedFilter = event.target.closest("[data-filter]");
+      if (!selectedFilter) return;
+
+      const category = selectedFilter.dataset.filter;
+      menuFilters.querySelectorAll("[data-filter]").forEach((button) => {
+        button.setAttribute("aria-pressed", String(button === selectedFilter));
+      });
+      menuCards.forEach((card) => {
+        card.hidden = category !== "all" && card.dataset.category !== category;
+      });
+    });
+
+    const renderCart = () => {
+      let itemCount = 0;
+      let total = 0;
+
+      cartItems.forEach(({ price, quantity }) => {
+        itemCount += quantity;
+        total += price * quantity;
+      });
+
+      cartCount.textContent = String(itemCount);
+      cartTotal.textContent = `₩${new Intl.NumberFormat("ko-KR").format(total)}`;
+    };
+
+    menuGrid.addEventListener("click", (event) => {
+      const addButton = event.target.closest(".add-button");
+      if (!addButton) return;
+
+      const name = addButton.dataset.name;
+      const price = Number(addButton.dataset.price);
+      const item = cartItems.get(name);
+      cartItems.set(name, { price, quantity: item ? item.quantity + 1 : 1 });
+      renderCart();
+    });
+
+    clearCart.addEventListener("click", () => {
+      cartItems.clear();
+      renderCart();
     });
   </script>
 </body>
