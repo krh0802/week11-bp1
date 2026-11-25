@@ -29,18 +29,21 @@
       background: var(--white);
       color: var(--black);
       font-family: var(--sans);
+      font-size: 17px;
+      line-height: 1.75;
+      letter-spacing: .01em;
       -webkit-font-smoothing: antialiased;
-      padding-bottom: 69px;
     }
     a { color: inherit; text-decoration: none; }
     button { color: inherit; font: inherit; }
     .wrap { width: min(1280px, calc(100% - 72px)); margin: 0 auto; }
     .eyebrow {
-      margin: 0 0 16px;
+      margin: 0 0 22px;
       color: #666666;
-      font-size: 9px;
+      font-size: 11px;
       font-weight: 700;
-      letter-spacing: .14em;
+      letter-spacing: .16em;
+      line-height: 1.8;
       text-transform: uppercase;
     }
 
@@ -56,14 +59,14 @@
     .nav { height: 72px; display: flex; align-items: center; justify-content: space-between; }
     .wordmark { font-size: 25px; font-weight: 800; letter-spacing: -.09em; }
     .nav-links { display: flex; align-items: center; gap: 34px; }
-    .nav-links a { font-size: 9px; font-weight: 700; letter-spacing: .1em; }
+    .nav-links a { font-size: 11px; font-weight: 700; letter-spacing: .12em; }
     .nav-links a:hover { color: #777; }
     .menu-toggle {
       display: none;
       padding: 8px 0 8px 8px;
       border: 0;
       background: transparent;
-      font-size: 9px;
+      font-size: 11px;
       font-weight: 700;
       letter-spacing: .1em;
       cursor: pointer;
@@ -83,14 +86,15 @@
       margin: 0 0 25px;
       font-size: clamp(50px, 7vw, 94px);
       font-weight: 500;
-      letter-spacing: -.095em;
-      line-height: .98;
+      letter-spacing: -.06em;
+      line-height: 1.12;
       word-break: keep-all;
     }
-    .hero h1 em { font-family: var(--serif); font-size: 1.07em; font-weight: 400; letter-spacing: -.045em; }
-    .hero-description { max-width: 350px; margin: 0; color: #555; font-size: 11px; line-height: 1.9; word-break: keep-all; }
-    .hero-index { margin-top: 55px; padding-top: 13px; border-top: 1px solid var(--line); color: #666; font-size: 8px; letter-spacing: .12em; }
+    .hero h1 em { font-family: var(--serif); font-size: 1.07em; font-weight: 400; letter-spacing: -.025em; }
+    .hero-description { max-width: 430px; margin: 0; color: #555; font-size: 16px; line-height: 1.8; word-break: keep-all; }
+    .hero-index { margin-top: 55px; padding-top: 16px; border-top: 1px solid var(--line); color: #666; font-size: 10px; letter-spacing: .14em; line-height: 1.8; }
     .hero-visual {
+      position: relative;
       display: grid;
       min-height: 480px;
       place-items: center;
@@ -98,12 +102,29 @@
       border-left: 1px solid var(--black);
       background: var(--ink);
     }
-    .hero-visual svg { width: min(77%, 420px); height: auto; }
-    .hero-caption { align-self: end; justify-self: start; padding: 0 0 19px 22px; color: #B7B7B7; font-size: 8px; letter-spacing: .12em; }
-    .hero-visual-inner { display: grid; width: 100%; height: 100%; grid-template-rows: 1fr auto; }
+    .photo-frame { position: relative; margin: 0; overflow: hidden; background: #F1F1F1; }
+    .photo-frame img { display: block; width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.08); }
+    .photo-fallback {
+      position: absolute;
+      inset: 0;
+      display: none;
+      place-content: center;
+      justify-items: center;
+      gap: 12px;
+      background: #F1F1F1;
+      color: #555;
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-align: center;
+    }
+    .photo-fallback strong { color: var(--black); font-size: 24px; letter-spacing: -.08em; }
+    .photo-frame[data-image-error="true"] img { display: none; }
+    .photo-frame[data-image-error="true"] .photo-fallback { display: grid; }
+    .hero-photo { position: absolute; inset: 0; }
+    .hero-caption { position: absolute; z-index: 1; bottom: 0; left: 0; width: 100%; margin: 0; padding: 36px 22px 18px; background: linear-gradient(transparent, rgba(0, 0, 0, .7)); color: #FFF; font-size: 10px; letter-spacing: .14em; line-height: 1.8; }
 
     .meta-strip { display: grid; grid-template-columns: 1fr 1fr 1fr; border-bottom: 1px solid var(--black); }
-    .meta-cell { min-height: 57px; display: flex; align-items: center; padding: 12px 18px; border-right: 1px solid var(--line); font-size: 8px; font-weight: 700; letter-spacing: .1em; }
+    .meta-cell { min-height: 64px; display: flex; align-items: center; padding: 12px 18px; border-right: 1px solid var(--line); font-size: 10px; font-weight: 700; letter-spacing: .12em; line-height: 1.8; }
     .meta-cell:first-child { padding-left: 0; }
     .meta-cell:last-child { justify-content: flex-end; padding-right: 0; border-right: 0; text-align: right; }
 
@@ -116,9 +137,9 @@
       margin-bottom: 30px;
     }
     .section-heading .eyebrow { margin-bottom: 11px; }
-    .section-heading h2 { margin: 0; font-size: clamp(32px, 4vw, 52px); font-weight: 600; letter-spacing: -.08em; line-height: 1; }
+    .section-heading h2 { margin: 0; font-size: clamp(36px, 4vw, 56px); font-weight: 600; letter-spacing: -.04em; line-height: 1.2; }
     .section-heading h2 em { font-family: var(--serif); font-weight: 400; }
-    .section-heading > p { max-width: 250px; margin: 0; color: #555; font-size: 9px; line-height: 1.8; text-align: right; }
+    .section-heading > p { max-width: 310px; margin: 0; color: #555; font-size: 14px; line-height: 1.8; text-align: right; }
     .menu-filters { display: flex; flex-wrap: wrap; margin-bottom: 25px; border-top: 1px solid var(--black); border-bottom: 1px solid var(--black); }
     .filter-button {
       min-height: 42px;
@@ -126,7 +147,7 @@
       border: 0;
       border-right: 1px solid var(--line);
       background: var(--white);
-      font-size: 8px;
+      font-size: 10px;
       font-weight: 700;
       letter-spacing: .08em;
       cursor: pointer;
@@ -152,7 +173,7 @@
       top: 13px;
       left: 14px;
       color: #BDBDBD;
-      font-size: 7px;
+      font-size: 9px;
       font-weight: 600;
       letter-spacing: .1em;
     }
@@ -169,47 +190,29 @@
     .visual-art .fill-soft { fill: #777777; }
     .menu-info { padding-top: 12px; }
     .menu-title { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
-    .menu-title h3 { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: -.04em; }
-    .menu-price { flex: 0 0 auto; font-size: 10px; font-weight: 700; }
-    .menu-english { margin: 4px 0 8px; color: #666; font-family: var(--serif); font-size: 14px; font-style: italic; }
-    .menu-description { min-height: 30px; margin: 0; color: #555; font-size: 9px; line-height: 1.7; word-break: keep-all; }
-    .menu-bottom { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 12px; padding-top: 9px; border-top: 1px solid var(--line); }
-    .menu-category { color: #666; font-size: 7px; font-weight: 700; letter-spacing: .12em; }
-    .add-button {
-      min-width: 57px;
-      padding: 7px 8px;
-      border: 1px solid var(--black);
-      background: var(--white);
-      font-size: 8px;
-      font-weight: 700;
-      letter-spacing: .04em;
-      cursor: pointer;
-      transition: background .2s ease, color .2s ease;
-    }
-    .add-button:hover { background: var(--black); color: var(--white); }
+    .menu-title h3 { margin: 0; font-size: 16px; font-weight: 700; letter-spacing: -.02em; line-height: 1.6; }
+    .menu-price { flex: 0 0 auto; font-size: 14px; font-weight: 700; }
+    .menu-english { margin: 6px 0 11px; color: #666; font-family: var(--serif); font-size: 18px; font-style: italic; line-height: 1.7; letter-spacing: .015em; }
+    .menu-description { min-height: 3.6em; margin: 0; color: #555; font-size: 14px; line-height: 1.8; word-break: keep-all; }
+    .menu-bottom { display: flex; align-items: center; margin-top: 15px; padding-top: 11px; border-top: 1px solid var(--line); }
+    .menu-category { color: #666; font-size: 9px; font-weight: 700; letter-spacing: .14em; }
 
     .story-section { padding-top: 0; }
     .story-grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--black); border-bottom: 1px solid var(--black); }
-    .story-art {
-      display: grid;
-      min-height: 380px;
-      place-items: center;
-      background: var(--ink);
-    }
-    .story-art svg { width: min(58%, 260px); height: auto; }
+    .story-photo { min-height: 380px; }
     .story-copy { display: flex; flex-direction: column; justify-content: center; padding: 54px 8%; border-left: 1px solid var(--black); }
-    .story-copy h2 { margin: 0 0 20px; font-size: clamp(34px, 4vw, 52px); font-weight: 500; letter-spacing: -.08em; line-height: 1.1; }
+    .story-copy h2 { margin: 0 0 27px; font-size: clamp(38px, 4vw, 56px); font-weight: 500; letter-spacing: -.04em; line-height: 1.25; }
     .story-copy h2 em { font-family: var(--serif); font-weight: 400; }
-    .story-copy p:not(.eyebrow) { max-width: 390px; margin: 0 0 12px; color: #555; font-size: 10px; line-height: 1.9; word-break: keep-all; }
-    .story-signoff { margin-top: 27px; padding-top: 11px; border-top: 1px solid var(--line); color: #666; font-size: 8px; font-weight: 700; letter-spacing: .1em; }
+    .story-copy p:not(.eyebrow) { max-width: 430px; margin: 0 0 18px; color: #555; font-size: 15px; line-height: 1.8; word-break: keep-all; }
+    .story-signoff { margin-top: 30px; padding-top: 14px; border-top: 1px solid var(--line); color: #666; font-size: 10px; font-weight: 700; letter-spacing: .12em; line-height: 1.8; }
 
     .visit-section { padding-top: 0; }
     .visit-grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--black); }
     .visit-copy { padding: 34px 22px 34px 0; }
-    .visit-copy h2 { margin: 0 0 30px; font-size: 30px; font-weight: 600; letter-spacing: -.07em; }
+    .visit-copy h2 { margin: 0 0 30px; font-size: 36px; font-weight: 600; letter-spacing: -.04em; line-height: 1.25; }
     .visit-copy h2 em { font-family: var(--serif); font-weight: 400; }
-    .visit-row { display: grid; grid-template-columns: 105px 1fr; gap: 15px; padding: 13px 0; border-top: 1px solid var(--line); font-size: 9px; line-height: 1.7; }
-    .visit-row dt { color: #666; font-size: 7px; font-weight: 700; letter-spacing: .12em; }
+    .visit-row { display: grid; grid-template-columns: 125px 1fr; gap: 15px; padding: 16px 0; border-top: 1px solid var(--line); font-size: 14px; line-height: 1.8; }
+    .visit-row dt { color: #666; font-size: 9px; font-weight: 700; letter-spacing: .14em; line-height: 1.8; }
     .visit-row dd { margin: 0; font-weight: 600; }
     .visit-visual {
       display: grid;
@@ -223,35 +226,10 @@
     footer { border-top: 1px solid var(--black); }
     .footer-main { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 26px 0; }
     .footer-brand { font-size: 22px; font-weight: 800; letter-spacing: -.09em; }
-    .footer-caption { margin: 6px 0 0; color: #555; font-family: var(--serif); font-size: 14px; font-style: italic; }
-    .footer-operator { align-self: center; justify-self: end; margin: 0; font-size: 9px; }
+    .footer-caption { margin: 8px 0 0; color: #555; font-family: var(--serif); font-size: 17px; font-style: italic; line-height: 1.8; }
+    .footer-operator { align-self: center; justify-self: end; margin: 0; font-size: 12px; line-height: 1.8; }
     .footer-bottom { display: flex; justify-content: space-between; gap: 15px; padding: 12px 0 20px; border-top: 1px solid var(--line); }
-    .footer-bottom p { margin: 0; font-size: 7px; font-weight: 700; letter-spacing: .1em; }
-
-    .order-bar {
-      position: fixed;
-      z-index: 30;
-      right: 50%;
-      bottom: 0;
-      display: flex;
-      width: 100%;
-      min-height: 69px;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      padding: 10px max(36px, calc((100vw - 1280px) / 2));
-      border-top: 1px solid rgba(17, 17, 17, .35);
-      background: rgba(255, 255, 255, .86);
-      -webkit-backdrop-filter: blur(18px);
-      backdrop-filter: blur(18px);
-      transform: translateX(50%);
-    }
-    .order-label { margin: 0 0 3px; color: #666; font-size: 7px; font-weight: 700; letter-spacing: .13em; }
-    .order-count { margin: 0; font-size: 10px; font-weight: 700; }
-    .order-count span { margin-left: 4px; color: #666; font-weight: 400; }
-    .order-total-wrap { display: flex; align-items: center; gap: 23px; }
-    .order-total { min-width: 96px; margin: 0; font-size: 15px; font-weight: 700; text-align: right; }
-    .clear-cart { padding: 7px 0 7px 12px; border: 0; border-left: 1px solid var(--line); background: transparent; font-size: 8px; font-weight: 700; cursor: pointer; }
+    .footer-bottom p { margin: 0; font-size: 9px; font-weight: 700; letter-spacing: .12em; line-height: 1.8; }
 
     .fade-up { opacity: 0; transform: translateY(18px); transition: opacity .65s ease, transform .65s cubic-bezier(.2, .7, .2, 1); }
     .fade-up.is-visible { opacity: 1; transform: translateY(0); }
@@ -263,7 +241,7 @@
       .hero { min-height: 560px; }
       .hero-visual { min-height: 420px; }
       .menu-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 15px; }
-      .story-art { min-height: 340px; }
+      .story-photo { min-height: 340px; }
       .visit-visual { min-height: 290px; }
     }
     @media (max-width: 620px) {
@@ -289,40 +267,38 @@
       .hero { grid-template-columns: 1fr; min-height: 0; }
       .hero-copy { padding: 58px 0 35px; }
       .hero h1 { font-size: clamp(54px, 15vw, 76px); }
-      .hero-description { max-width: 320px; font-size: 10px; }
+      .hero-description { max-width: 340px; font-size: 15px; }
       .hero-index { margin-top: 32px; }
       .hero-visual { min-height: 330px; border-top: 1px solid var(--black); border-left: 0; }
-      .hero-visual svg { width: min(61%, 240px); }
       .hero-caption { padding-left: 14px; }
       .meta-strip { grid-template-columns: 1fr 1fr; }
-      .meta-cell { min-height: 47px; padding: 10px; font-size: 7px; }
+      .meta-cell { min-height: 52px; padding: 10px; font-size: 9px; }
       .meta-cell:first-child { padding-left: 0; }
       .meta-cell:nth-child(2) { border-right: 0; }
       .meta-cell:last-child { display: none; }
       .section { padding: 75px 0; }
       .section-heading { grid-template-columns: 1fr; gap: 13px; margin-bottom: 23px; }
-      .section-heading > p { text-align: left; }
+      .section-heading > p { font-size: 13px; text-align: left; }
       .menu-filters { display: grid; grid-template-columns: repeat(4, 1fr); }
-      .filter-button { padding: 0 5px; font-size: 7px; }
+      .filter-button { padding: 0 5px; font-size: 9px; }
       .filter-button[aria-pressed="true"], .filter-button:first-child[aria-pressed="true"] { padding-right: 5px; padding-left: 5px; }
       .menu-grid { gap: 25px 10px; }
-      .visual-code { top: 9px; left: 9px; font-size: 6px; }
+      .visual-code { top: 10px; left: 10px; font-size: 8px; }
       .visual-art { padding: 12%; }
-      .menu-info { padding-top: 9px; }
+      .menu-info { padding-top: 12px; }
       .menu-title { align-items: start; flex-direction: column; gap: 4px; }
-      .menu-title h3 { font-size: 10px; }
-      .menu-price { font-size: 9px; }
-      .menu-english { margin: 3px 0 6px; font-size: 12px; }
-      .menu-description { min-height: 42px; font-size: 8px; }
-      .menu-bottom { margin-top: 9px; }
-      .menu-category { font-size: 6px; }
-      .add-button { min-width: 48px; padding: 6px 5px; font-size: 7px; }
+      .menu-title h3 { font-size: 14px; }
+      .menu-price { font-size: 12px; }
+      .menu-english { margin: 4px 0 8px; font-size: 15px; }
+      .menu-description { min-height: 4.5em; font-size: 13px; }
+      .menu-bottom { margin-top: 12px; }
+      .menu-category { font-size: 8px; }
       .story-section { padding-top: 0; }
       .story-grid { grid-template-columns: 1fr; }
-      .story-art { min-height: 280px; }
-      .story-art svg { width: 46%; }
-      .story-copy { padding: 32px 20px; border-top: 1px solid var(--black); border-left: 0; }
-      .story-copy h2 { font-size: 40px; }
+      .story-photo { min-height: 280px; }
+      .story-copy { padding: 38px 20px; border-top: 1px solid var(--black); border-left: 0; }
+      .story-copy h2 { font-size: 42px; }
+      .story-copy p:not(.eyebrow) { font-size: 14px; }
       .visit-section { padding-top: 0; }
       .visit-grid { grid-template-columns: 1fr; }
       .visit-copy { padding: 25px 0; }
@@ -330,11 +306,6 @@
       .footer-main { grid-template-columns: 1fr; gap: 16px; }
       .footer-operator { justify-self: start; }
       .footer-bottom { flex-direction: column; gap: 7px; }
-      .order-bar { min-height: 62px; padding: 9px 18px; }
-      .order-total-wrap { gap: 15px; }
-      .order-total { min-width: 72px; font-size: 13px; }
-      .clear-cart { font-size: 7px; }
-      body { padding-bottom: 62px; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
@@ -364,19 +335,11 @@
         <p class="hero-index">COFFEE / NON-COFFEE / SMALL PLATES</p>
       </div>
       <div class="hero-visual fade-up">
-        <div class="hero-visual-inner">
-          <svg viewBox="0 0 400 400" role="img" aria-label="MUTE.의 모노톤 커피 컵 그래픽">
-            <path d="M92 183h196l-18 126H110L92 183Z" fill="#222" stroke="#E8E8E8" stroke-width="2"/>
-            <ellipse cx="190" cy="183" rx="98" ry="24" fill="#111" stroke="#E8E8E8" stroke-width="2"/>
-            <ellipse cx="190" cy="184" rx="76" ry="15" fill="#AFAFAF"/>
-            <path d="M288 207h22c21 0 29 15 25 35-4 19-17 30-42 30" fill="none" stroke="#E8E8E8" stroke-width="2"/>
-            <path d="M129 225h121M134 241h110M140 257h99" stroke="#777" stroke-width="1"/>
-            <path d="M155 140c-17-20 18-28 1-49M191 137c-17-20 18-28 1-49M227 140c-17-20 18-28 1-49" fill="none" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M110 327h160" stroke="#E8E8E8" stroke-width="2"/>
-            <text x="190" y="357" fill="#BDBDBD" font-family="sans-serif" font-size="8" letter-spacing="3" text-anchor="middle">MUTE. / STUDY 001</text>
-          </svg>
-          <p class="hero-caption">FIG. 00 — COFFEE IN A QUIETER FORM</p>
-        </div>
+        <figure class="photo-frame hero-photo">
+          <img src="https://images.unsplash.com/photo-1493606278519-11aa9f86e40a?auto=format&amp;fit=crop&amp;w=1600&amp;q=88" alt="생화이트 배경 위에 놓인 블랙 커피 한 잔" fetchpriority="high">
+          <span class="photo-fallback" aria-hidden="true"><strong>MUTE.</strong>STUDIO IMAGE</span>
+        </figure>
+        <p class="hero-caption">FIG. 00 — SEOUL / SEONGSU</p>
       </div>
     </section>
 
@@ -411,7 +374,7 @@
                 <path d="M95 73c-8-10 9-14 2-24M119 72c-8-10 9-14 2-24M142 73c-8-10 9-14 2-24" class="stroke-soft"/>
               </svg>
             </div>
-            <div class="menu-info"><div class="menu-title"><h3>아인슈페너</h3><span class="menu-price">₩6,500</span></div><p class="menu-english">Einspänner</p><p class="menu-description">더블 에스프레소와 차가운 크림, 카카오 더스트.</p><div class="menu-bottom"><span class="menu-category">COFFEE</span><button class="add-button" type="button" data-name="아인슈페너" data-price="6500">ADD +</button></div></div>
+            <div class="menu-info"><div class="menu-title"><h3>아인슈페너</h3><span class="menu-price">₩6,500</span></div><p class="menu-english">Einspänner</p><p class="menu-description">더블 에스프레소와 차가운 크림, 카카오 더스트.</p><div class="menu-bottom"><span class="menu-category">COFFEE</span></div></div>
           </article>
           <article class="menu-card fade-up" data-category="coffee">
             <div class="visual-frame">
@@ -425,7 +388,7 @@
                 <ellipse cx="116" cy="181" rx="70" ry="10" class="stroke-soft"/>
               </svg>
             </div>
-            <div class="menu-info"><div class="menu-title"><h3>플랫 화이트</h3><span class="menu-price">₩5,500</span></div><p class="menu-english">Flat White</p><p class="menu-description">짧게 추출한 에스프레소와 실키한 마이크로폼.</p><div class="menu-bottom"><span class="menu-category">COFFEE</span><button class="add-button" type="button" data-name="플랫 화이트" data-price="5500">ADD +</button></div></div>
+            <div class="menu-info"><div class="menu-title"><h3>플랫 화이트</h3><span class="menu-price">₩5,500</span></div><p class="menu-english">Flat White</p><p class="menu-description">짧게 추출한 에스프레소와 실키한 마이크로폼.</p><div class="menu-bottom"><span class="menu-category">COFFEE</span></div></div>
           </article>
           <article class="menu-card fade-up" data-category="coffee">
             <div class="visual-frame">
@@ -440,7 +403,7 @@
                 <path d="M87 196h63" class="stroke"/>
               </svg>
             </div>
-            <div class="menu-info"><div class="menu-title"><h3>에스프레소</h3><span class="menu-price">₩4,000</span></div><p class="menu-english">MUTE. Espresso</p><p class="menu-description">다크 초콜릿과 볶은 헤이즐넛의 짧은 여운.</p><div class="menu-bottom"><span class="menu-category">COFFEE</span><button class="add-button" type="button" data-name="에스프레소" data-price="4000">ADD +</button></div></div>
+            <div class="menu-info"><div class="menu-title"><h3>에스프레소</h3><span class="menu-price">₩4,000</span></div><p class="menu-english">MUTE. Espresso</p><p class="menu-description">다크 초콜릿과 볶은 헤이즐넛의 짧은 여운.</p><div class="menu-bottom"><span class="menu-category">COFFEE</span></div></div>
           </article>
           <article class="menu-card fade-up" data-category="coffee">
             <div class="visual-frame">
@@ -455,7 +418,7 @@
                 <circle cx="132" cy="91" r="2" class="fill"/>
               </svg>
             </div>
-            <div class="menu-info"><div class="menu-title"><h3>바닐라 빈 라테</h3><span class="menu-price">₩6,000</span></div><p class="menu-english">Vanilla Bean Latte</p><p class="menu-description">천연 바닐라 빈 시럽을 더한 차가운 라테.</p><div class="menu-bottom"><span class="menu-category">COFFEE</span><button class="add-button" type="button" data-name="바닐라 빈 라테" data-price="6000">ADD +</button></div></div>
+            <div class="menu-info"><div class="menu-title"><h3>바닐라 빈 라테</h3><span class="menu-price">₩6,000</span></div><p class="menu-english">Vanilla Bean Latte</p><p class="menu-description">천연 바닐라 빈 시럽을 더한 차가운 라테.</p><div class="menu-bottom"><span class="menu-category">COFFEE</span></div></div>
           </article>
           <article class="menu-card fade-up" data-category="noncoffee">
             <div class="visual-frame">
@@ -470,7 +433,7 @@
                 <path d="M105 75c-8-9 7-14 2-22m23 22c-8-9 7-14 2-22m20 23c-8-9 7-14 2-22" class="stroke-soft"/>
               </svg>
             </div>
-            <div class="menu-info"><div class="menu-title"><h3>말차 크림 라테</h3><span class="menu-price">₩6,500</span></div><p class="menu-english">Matcha Cream Latte</p><p class="menu-description">쌉싸름한 말차와 밀도 있는 크림 레이어.</p><div class="menu-bottom"><span class="menu-category">NON-COFFEE</span><button class="add-button" type="button" data-name="말차 크림 라테" data-price="6500">ADD +</button></div></div>
+            <div class="menu-info"><div class="menu-title"><h3>말차 크림 라테</h3><span class="menu-price">₩6,500</span></div><p class="menu-english">Matcha Cream Latte</p><p class="menu-description">쌉싸름한 말차와 밀도 있는 크림 레이어.</p><div class="menu-bottom"><span class="menu-category">NON-COFFEE</span></div></div>
           </article>
           <article class="menu-card fade-up" data-category="noncoffee">
             <div class="visual-frame">
@@ -485,7 +448,7 @@
                 <path d="M123 51v24m-6-12h13" class="stroke"/>
               </svg>
             </div>
-            <div class="menu-info"><div class="menu-title"><h3>복숭아 얼그레이 에이드</h3><span class="menu-price">₩6,800</span></div><p class="menu-english">Peach Earl Grey Ade</p><p class="menu-description">복숭아 과육과 베르가못 향의 스파클링 티.</p><div class="menu-bottom"><span class="menu-category">NON-COFFEE</span><button class="add-button" type="button" data-name="복숭아 얼그레이 에이드" data-price="6800">ADD +</button></div></div>
+            <div class="menu-info"><div class="menu-title"><h3>복숭아 얼그레이 에이드</h3><span class="menu-price">₩6,800</span></div><p class="menu-english">Peach Earl Grey Ade</p><p class="menu-description">복숭아 과육과 베르가못 향의 스파클링 티.</p><div class="menu-bottom"><span class="menu-category">NON-COFFEE</span></div></div>
           </article>
           <article class="menu-card fade-up" data-category="noncoffee">
             <div class="visual-frame">
@@ -500,7 +463,7 @@
                 <path d="M133 143c0-5 4-8 8-8" class="stroke-soft"/>
               </svg>
             </div>
-            <div class="menu-info"><div class="menu-title"><h3>생딸기 우유</h3><span class="menu-price">₩6,500</span></div><p class="menu-english">Fresh Strawberry Milk</p><p class="menu-description">천천히 졸인 딸기 콩포트와 차가운 우유.</p><div class="menu-bottom"><span class="menu-category">NON-COFFEE</span><button class="add-button" type="button" data-name="생딸기 우유" data-price="6500">ADD +</button></div></div>
+            <div class="menu-info"><div class="menu-title"><h3>생딸기 우유</h3><span class="menu-price">₩6,500</span></div><p class="menu-english">Fresh Strawberry Milk</p><p class="menu-description">천천히 졸인 딸기 콩포트와 차가운 우유.</p><div class="menu-bottom"><span class="menu-category">NON-COFFEE</span></div></div>
           </article>
           <article class="menu-card fade-up" data-category="noncoffee">
             <div class="visual-frame">
@@ -516,7 +479,7 @@
                 <ellipse cx="116" cy="181" rx="67" ry="8" class="stroke-soft"/>
               </svg>
             </div>
-            <div class="menu-info"><div class="menu-title"><h3>유자 허니 티</h3><span class="menu-price">₩5,800</span></div><p class="menu-english">Yuja Honey Tea</p><p class="menu-description">유자 껍질과 꿀, 가벼운 시트러스 노트.</p><div class="menu-bottom"><span class="menu-category">NON-COFFEE</span><button class="add-button" type="button" data-name="유자 허니 티" data-price="5800">ADD +</button></div></div>
+            <div class="menu-info"><div class="menu-title"><h3>유자 허니 티</h3><span class="menu-price">₩5,800</span></div><p class="menu-english">Yuja Honey Tea</p><p class="menu-description">유자 껍질과 꿀, 가벼운 시트러스 노트.</p><div class="menu-bottom"><span class="menu-category">NON-COFFEE</span></div></div>
           </article>
           <article class="menu-card fade-up" data-category="dessert">
             <div class="visual-frame">
@@ -531,7 +494,7 @@
                 <path d="M152 83c-8 5-14 6-19 3 3-9 10-13 20-12" class="stroke-soft"/>
               </svg>
             </div>
-            <div class="menu-info"><div class="menu-title"><h3>딸기 크림 크로플</h3><span class="menu-price">₩8,500</span></div><p class="menu-english">Strawberry Cream Croffle</p><p class="menu-description">바삭한 크로플, 제철 딸기와 바닐라 크림.</p><div class="menu-bottom"><span class="menu-category">DESSERT</span><button class="add-button" type="button" data-name="딸기 크림 크로플" data-price="8500">ADD +</button></div></div>
+            <div class="menu-info"><div class="menu-title"><h3>딸기 크림 크로플</h3><span class="menu-price">₩8,500</span></div><p class="menu-english">Strawberry Cream Croffle</p><p class="menu-description">바삭한 크로플, 제철 딸기와 바닐라 크림.</p><div class="menu-bottom"><span class="menu-category">DESSERT</span></div></div>
           </article>
           <article class="menu-card fade-up" data-category="dessert">
             <div class="visual-frame">
@@ -545,7 +508,7 @@
                 <path d="M92 130c16 5 39 5 55 0m-48 12c12 3 25 3 38 0" class="stroke-soft"/>
               </svg>
             </div>
-            <div class="menu-info"><div class="menu-title"><h3>바스크 치즈케이크</h3><span class="menu-price">₩7,500</span></div><p class="menu-english">Basque Cheesecake</p><p class="menu-description">표면은 깊게, 속은 부드럽게 구운 케이크.</p><div class="menu-bottom"><span class="menu-category">DESSERT</span><button class="add-button" type="button" data-name="바스크 치즈케이크" data-price="7500">ADD +</button></div></div>
+            <div class="menu-info"><div class="menu-title"><h3>바스크 치즈케이크</h3><span class="menu-price">₩7,500</span></div><p class="menu-english">Basque Cheesecake</p><p class="menu-description">표면은 깊게, 속은 부드럽게 구운 케이크.</p><div class="menu-bottom"><span class="menu-category">DESSERT</span></div></div>
           </article>
           <article class="menu-card fade-up" data-category="dessert">
             <div class="visual-frame">
@@ -557,7 +520,7 @@
                 <ellipse cx="119" cy="191" rx="48" ry="7" class="stroke-soft"/>
               </svg>
             </div>
-            <div class="menu-info"><div class="menu-title"><h3>바닐라 까눌레</h3><span class="menu-price">₩3,800</span></div><p class="menu-english">Vanilla Canelé</p><p class="menu-description">럼과 바닐라 향을 담아 겉면을 천천히 구웠어요.</p><div class="menu-bottom"><span class="menu-category">DESSERT</span><button class="add-button" type="button" data-name="바닐라 까눌레" data-price="3800">ADD +</button></div></div>
+            <div class="menu-info"><div class="menu-title"><h3>바닐라 까눌레</h3><span class="menu-price">₩3,800</span></div><p class="menu-english">Vanilla Canelé</p><p class="menu-description">럼과 바닐라 향을 담아 겉면을 천천히 구웠어요.</p><div class="menu-bottom"><span class="menu-category">DESSERT</span></div></div>
           </article>
           <article class="menu-card fade-up" data-category="dessert">
             <div class="visual-frame">
@@ -572,7 +535,7 @@
                 <circle cx="119" cy="154" r="2" class="fill"/>
               </svg>
             </div>
-            <div class="menu-info"><div class="menu-title"><h3>레몬 파운드 케이크</h3><span class="menu-price">₩4,800</span></div><p class="menu-english">Lemon Pound Cake</p><p class="menu-description">레몬 제스트와 얇은 글레이즈를 더한 한 조각.</p><div class="menu-bottom"><span class="menu-category">DESSERT</span><button class="add-button" type="button" data-name="레몬 파운드 케이크" data-price="4800">ADD +</button></div></div>
+            <div class="menu-info"><div class="menu-title"><h3>레몬 파운드 케이크</h3><span class="menu-price">₩4,800</span></div><p class="menu-english">Lemon Pound Cake</p><p class="menu-description">레몬 제스트와 얇은 글레이즈를 더한 한 조각.</p><div class="menu-bottom"><span class="menu-category">DESSERT</span></div></div>
           </article>
         </div>
       </div>
@@ -582,18 +545,10 @@
       <div class="wrap">
         <div class="section-heading fade-up"><div><p class="eyebrow">02 / BRAND NOTE</p><h2>About <em>MUTE.</em></h2></div><p>SEOUL / SEONGSU<br>COFFEE, WITHOUT THE NOISE.</p></div>
         <div class="story-grid fade-up">
-          <div class="story-art">
-            <svg viewBox="0 0 300 300" role="img" aria-label="MUTE. 브랜드를 상징하는 모노톤 컵 드로잉">
-              <path d="M69 106h145l-14 119H83L69 106Z" fill="#222" stroke="#E8E8E8" stroke-width="2"/>
-              <ellipse cx="141" cy="107" rx="72" ry="18" fill="#111" stroke="#E8E8E8" stroke-width="2"/>
-              <ellipse cx="141" cy="106" rx="54" ry="11" fill="#BDBDBD"/>
-              <path d="M214 130h15c22 0 24 34 2 41h-20" fill="none" stroke="#E8E8E8" stroke-width="2"/>
-              <path d="M108 143c8-16 18-16 29 0 10-16 21-16 30 0m-30 0v31m-17-16 17 16 17-16" fill="none" stroke="#222" stroke-width="3"/>
-              <path d="M96 188h91" stroke="#777" stroke-width="1.5"/>
-              <path d="M57 239h170" stroke="#E8E8E8" stroke-width="2"/>
-              <text x="142" y="263" fill="#BDBDBD" font-family="sans-serif" font-size="8" letter-spacing="3" text-anchor="middle">MUTE. / FORM STUDY</text>
-            </svg>
-          </div>
+          <figure class="photo-frame story-photo">
+            <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&amp;fit=crop&amp;w=1400&amp;q=88" alt="밝은 회색 배경 위에 놓인 커피 도구와 원두" loading="lazy">
+            <span class="photo-fallback" aria-hidden="true"><strong>MUTE.</strong>STUDIO IMAGE</span>
+          </figure>
           <div class="story-copy">
             <p class="eyebrow">A considered coffee bar</p>
             <h2>Less noise.<br><em>More room.</em></h2>
@@ -647,24 +602,11 @@
     </div>
   </footer>
 
-  <aside class="order-bar" aria-label="Order estimate">
-    <div><p class="order-label">ORDER / ESTIMATE</p><p class="order-count" aria-live="polite">SELECTED <strong id="cart-count">0</strong><span>ITEMS</span></p></div>
-    <div class="order-total-wrap">
-      <p class="order-total" id="cart-total" aria-live="polite">₩0</p>
-      <button class="clear-cart" type="button">CLEAR</button>
-    </div>
-  </aside>
-
   <script>
     const menuToggle = document.querySelector(".menu-toggle");
     const navLinks = document.querySelector("#nav-links");
     const menuFilters = document.querySelector(".menu-filters");
     const menuCards = document.querySelectorAll(".menu-card");
-    const menuGrid = document.querySelector(".menu-grid");
-    const cartCount = document.querySelector("#cart-count");
-    const cartTotal = document.querySelector("#cart-total");
-    const clearCart = document.querySelector(".clear-cart");
-    const cartItems = new Map();
 
     menuToggle.addEventListener("click", () => {
       const isOpen = navLinks.classList.toggle("is-open");
@@ -691,33 +633,12 @@
       });
     });
 
-    const renderCart = () => {
-      let itemCount = 0;
-      let total = 0;
-
-      cartItems.forEach(({ price, quantity }) => {
-        itemCount += quantity;
-        total += price * quantity;
-      });
-
-      cartCount.textContent = String(itemCount);
-      cartTotal.textContent = `₩${new Intl.NumberFormat("ko-KR").format(total)}`;
-    };
-
-    menuGrid.addEventListener("click", (event) => {
-      const addButton = event.target.closest(".add-button");
-      if (!addButton) return;
-
-      const name = addButton.dataset.name;
-      const price = Number(addButton.dataset.price);
-      const item = cartItems.get(name);
-      cartItems.set(name, { price, quantity: item ? item.quantity + 1 : 1 });
-      renderCart();
-    });
-
-    clearCart.addEventListener("click", () => {
-      cartItems.clear();
-      renderCart();
+    document.querySelectorAll(".photo-frame img").forEach((image) => {
+      const showFallback = () => {
+        image.closest(".photo-frame").dataset.imageError = "true";
+      };
+      image.addEventListener("error", showFallback, { once: true });
+      if (image.complete && image.naturalWidth === 0) showFallback();
     });
 
     const fadeElements = document.querySelectorAll(".fade-up");
